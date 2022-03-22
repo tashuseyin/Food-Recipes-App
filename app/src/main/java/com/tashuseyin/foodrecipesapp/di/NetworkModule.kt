@@ -1,6 +1,6 @@
 package com.tashuseyin.foodrecipesapp.di
 
-import com.tashuseyin.foodrecipes.common.Constants
+import com.tashuseyin.foodrecipesapp.common.Constants
 import com.tashuseyin.foodrecipesapp.data.datasource.remote.api.FoodRecipesApi
 import dagger.Module
 import dagger.Provides
