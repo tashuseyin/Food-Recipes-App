@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.viewbinding.ViewBinding
 import com.tashuseyin.foodrecipesapp.R
 import com.tashuseyin.foodrecipesapp.baseviewmodel.MainViewModel
@@ -15,7 +16,7 @@ import com.tashuseyin.foodrecipesapp.bindingadapter.BindingFragment
 import com.tashuseyin.foodrecipesapp.common.Resource
 import com.tashuseyin.foodrecipesapp.databinding.FragmentRecipesListBinding
 import com.tashuseyin.foodrecipesapp.presentation.ui.recipes_list.adapter.RecipesAdapter
-import com.tashuseyin.foodrecipesapp.util.Util
+import com.tashuseyin.foodrecipesapp.presentation.viewmodel.RecipesViewModel
 import com.tashuseyin.foodrecipesapp.util.observeOnce
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -23,7 +24,9 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class RecipesListFragment : BindingFragment<FragmentRecipesListBinding>() {
     private val adapter by lazy { RecipesAdapter() }
+    private val args: RecipesListFragmentArgs by navArgs()
     private val mainViewModel: MainViewModel by viewModels()
+    private val recipesViewModel: RecipesViewModel by viewModels()
     override val bindingInflater: (LayoutInflater) -> ViewBinding
         get() = FragmentRecipesListBinding::inflate
 
@@ -51,10 +54,11 @@ class RecipesListFragment : BindingFragment<FragmentRecipesListBinding>() {
 
 
     private fun requestApiData() {
-        mainViewModel.getRecipes(Util.applyQueries())
+        Log.d("RecipesFragment", "requestApiData called!")
+        mainViewModel.getRecipes(recipesViewModel.applyQueries())
         /** observeOnce sayesinde uygulamayı ilk kez yüklenirken hem databaseden
         hem de apiden veri çeker bu durumu engellemek için kullanıdık**/
-        mainViewModel.recipesResponse.observeOnce(viewLifecycleOwner) { result ->
+        mainViewModel.recipesResponse.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Resource.Success -> {
                     hideShimmerEffect()
@@ -76,7 +80,7 @@ class RecipesListFragment : BindingFragment<FragmentRecipesListBinding>() {
     private fun readDatabase() {
         lifecycleScope.launch {
             mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
-                if (database.isNotEmpty()) {
+                if (database.isNotEmpty() && !args.backBottomSheet) {
                     Log.d("TAG", "Database ")
                     adapter.setData(database[0].foodRecipe)
                     hideShimmerEffect()
