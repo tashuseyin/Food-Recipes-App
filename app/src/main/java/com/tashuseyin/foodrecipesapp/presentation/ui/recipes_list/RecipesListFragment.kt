@@ -7,7 +7,9 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import com.tashuseyin.foodrecipesapp.R
 import com.tashuseyin.foodrecipesapp.baseviewmodel.MainViewModel
 import com.tashuseyin.foodrecipesapp.bindingadapter.BindingFragment
 import com.tashuseyin.foodrecipesapp.common.Resource
@@ -29,6 +31,7 @@ class RecipesListFragment : BindingFragment<FragmentRecipesListBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
+        setListener()
         setRecyclerView()
         readDatabase()
     }
@@ -37,6 +40,15 @@ class RecipesListFragment : BindingFragment<FragmentRecipesListBinding>() {
         binding.recyclerview.adapter = adapter
         showShimmerEffect()
     }
+
+    private fun setListener() {
+        binding.apply {
+            recipesFab.setOnClickListener {
+                findNavController().navigate(R.id.action_recipesListFragment_to_recipesBottomSheetFragment)
+            }
+        }
+    }
+
 
     private fun requestApiData() {
         mainViewModel.getRecipes(Util.applyQueries())
