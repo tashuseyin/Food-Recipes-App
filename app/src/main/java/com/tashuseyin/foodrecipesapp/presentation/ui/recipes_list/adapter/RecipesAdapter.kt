@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.tashuseyin.foodrecipesapp.data.model.remote.FoodRecipeDto
-import com.tashuseyin.foodrecipesapp.data.model.remote.FoodResult
+import com.tashuseyin.foodrecipesapp.data.model.FoodRecipes
+import com.tashuseyin.foodrecipesapp.data.model.FoodResult
 import com.tashuseyin.foodrecipesapp.databinding.RecipesRowLayoutBinding
 import com.tashuseyin.foodrecipesapp.util.RecipesDiffUtil
 
 class RecipesAdapter : RecyclerView.Adapter<RecipesViewHolder>() {
-    private var foodRecipesList = emptyList<FoodRecipeDto>()
+    private var foodRecipesList = emptyList<FoodRecipes>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipesViewHolder {
         val binding =

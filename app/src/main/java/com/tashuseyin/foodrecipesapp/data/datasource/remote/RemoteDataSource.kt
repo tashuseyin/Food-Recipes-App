@@ -5,8 +5,7 @@ import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(
     private val foodRecipesApi: FoodRecipesApi
-) : RemoteDataSourceImpl {
-    override suspend fun getFoodRecipes(queries: Map<String, String>) =
+) {
+    suspend fun getFoodRecipes(queries: Map<String, String>) =
         foodRecipesApi.getRecipes(queries)
-
 }

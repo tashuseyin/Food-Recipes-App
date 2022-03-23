@@ -1,4 +1,4 @@
-package com.tashuseyin.foodrecipesapp.presentation.bindingadapter
+package com.tashuseyin.foodrecipesapp.bindingadapter
 
 import android.os.Bundle
 import android.view.LayoutInflater

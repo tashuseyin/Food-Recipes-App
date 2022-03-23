@@ -1,6 +1,6 @@
 package com.tashuseyin.foodrecipesapp.data.datasource.remote.api
 
-import com.tashuseyin.foodrecipesapp.data.model.remote.FoodResult
+import com.tashuseyin.foodrecipesapp.data.model.FoodResult
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.QueryMap

@@ -3,7 +3,7 @@ package com.tashuseyin.foodrecipesapp.presentation.ui.favorite_recipes
 import android.view.LayoutInflater
 import androidx.viewbinding.ViewBinding
 import com.tashuseyin.foodrecipesapp.databinding.FragmentFavoriteRecipesBinding
-import com.tashuseyin.foodrecipesapp.presentation.bindingadapter.BindingFragment
+import com.tashuseyin.foodrecipesapp.bindingadapter.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

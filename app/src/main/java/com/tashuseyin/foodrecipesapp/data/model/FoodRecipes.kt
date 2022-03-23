@@ -1,9 +1,9 @@
-package com.tashuseyin.foodrecipesapp.data.model.remote
+package com.tashuseyin.foodrecipesapp.data.model
 
 import com.google.gson.annotations.SerializedName
 
 
-data class FoodRecipeDto(
+data class FoodRecipes(
     @SerializedName("aggregateLikes")
     val aggregateLikes: Int,
     @SerializedName("cheap")

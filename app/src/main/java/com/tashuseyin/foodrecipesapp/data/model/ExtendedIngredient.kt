@@ -1,4 +1,4 @@
-package com.tashuseyin.foodrecipesapp.data.model.remote
+package com.tashuseyin.foodrecipesapp.data.model
 
 import com.google.gson.annotations.SerializedName
 
