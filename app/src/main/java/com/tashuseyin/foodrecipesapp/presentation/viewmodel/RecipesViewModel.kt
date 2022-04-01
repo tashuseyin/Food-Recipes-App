@@ -6,8 +6,15 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.tashuseyin.foodrecipesapp.common.Constants
+import com.tashuseyin.foodrecipesapp.common.Constants.API_KEY
 import com.tashuseyin.foodrecipesapp.common.Constants.DEFAULT_DIET_TYPE
 import com.tashuseyin.foodrecipesapp.common.Constants.DEFAULT_MEAL_TYPE
+import com.tashuseyin.foodrecipesapp.common.Constants.DEFAULT_RECIPES_NUMBER
+import com.tashuseyin.foodrecipesapp.common.Constants.QUERY_ADD_RECIPE_INFORMATION
+import com.tashuseyin.foodrecipesapp.common.Constants.QUERY_API_KEY
+import com.tashuseyin.foodrecipesapp.common.Constants.QUERY_FILL_INGREDIENTS
+import com.tashuseyin.foodrecipesapp.common.Constants.QUERY_NUMBER
+import com.tashuseyin.foodrecipesapp.common.Constants.QUERY_SEARCH
 import com.tashuseyin.foodrecipesapp.data.repository.DataStoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -54,6 +61,16 @@ class RecipesViewModel @Inject constructor(
         queries[Constants.QUERY_DIET] = dietType
         queries[Constants.QUERY_ADD_RECIPE_INFORMATION] = "true"
         queries[Constants.QUERY_FILL_INGREDIENTS] = "true"
+        return queries
+    }
+
+    fun applySearchQuery(searchQuery: String): HashMap<String, String> {
+        val queries: HashMap<String, String> = HashMap()
+        queries[QUERY_SEARCH] = searchQuery
+        queries[QUERY_NUMBER] = DEFAULT_RECIPES_NUMBER
+        queries[QUERY_API_KEY] = API_KEY
+        queries[QUERY_ADD_RECIPE_INFORMATION] = "true"
+        queries[QUERY_FILL_INGREDIENTS] = "true"
         return queries
     }
 

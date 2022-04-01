@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
-import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -28,7 +28,8 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class RecipesListFragment : BindingFragment<FragmentRecipesListBinding>(), SearchView.OnQueryTextListener {
+class RecipesListFragment : BindingFragment<FragmentRecipesListBinding>(),
+    SearchView.OnQueryTextListener {
     private val adapter by lazy { RecipesAdapter() }
     private val args: RecipesListFragmentArgs by navArgs()
     private val mainViewModel: MainViewModel by viewModels()
@@ -76,7 +77,10 @@ class RecipesListFragment : BindingFragment<FragmentRecipesListBinding>(), Searc
         searchView?.setOnQueryTextListener(this)
     }
 
-    override fun onQueryTextSubmit(p0: String?): Boolean {
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if (query != null) {
+            searchApiData(query)
+        }
         return true
     }
 
@@ -96,8 +100,29 @@ class RecipesListFragment : BindingFragment<FragmentRecipesListBinding>(), Searc
     }
 
     private fun observeBackOnline() {
-        recipesViewModel.readBackOnline.observe(viewLifecycleOwner){
+        recipesViewModel.readBackOnline.observe(viewLifecycleOwner) {
             recipesViewModel.backOnline = it
+        }
+    }
+
+    private fun searchApiData(searchQuery: String) {
+        showShimmerEffect()
+        mainViewModel.searchRecipes(recipesViewModel.applySearchQuery(searchQuery))
+        mainViewModel.searchRecipesResponse.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Resource.Success -> {
+                    hideShimmerEffect()
+                    result.data.let { adapter.setData(it!!) }
+                }
+                is Resource.Error -> {
+                    hideShimmerEffect()
+                    Toast.makeText(context, result.message.toString(), Toast.LENGTH_SHORT).show()
+                    binding.errorTextView.isVisible = true
+                }
+                is Resource.Loading -> {
+                    showShimmerEffect()
+                }
+            }
         }
     }
 

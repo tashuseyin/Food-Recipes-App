@@ -7,7 +7,6 @@ import android.net.NetworkCapabilities
 import androidx.lifecycle.*
 import com.tashuseyin.foodrecipesapp.common.Resource
 import com.tashuseyin.foodrecipesapp.data.datasource.local.entity.RecipesEntity
-import com.tashuseyin.foodrecipesapp.data.model.FoodRecipes
 import com.tashuseyin.foodrecipesapp.data.model.FoodResult
 import com.tashuseyin.foodrecipesapp.data.repository.FoodRecipesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,18 +24,40 @@ class MainViewModel @Inject constructor(
     /**Database**/
     val readRecipes: LiveData<List<RecipesEntity>> = repository.local.readRecipes().asLiveData()
 
-    private fun insertRecipes(recipesEntity: RecipesEntity) = viewModelScope.launch(Dispatchers.IO) {
-        repository.local.insertRecipes(recipesEntity)
-    }
+    private fun insertRecipes(recipesEntity: RecipesEntity) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.local.insertRecipes(recipesEntity)
+        }
 
     /**Retrofit**/
     private val _recipesResponse: MutableLiveData<Resource<FoodResult>> = MutableLiveData()
     val recipesResponse get() = _recipesResponse
 
+    private val _searchRecipesResponse: MutableLiveData<Resource<FoodResult>> = MutableLiveData()
+    val searchRecipesResponse get() = _searchRecipesResponse
 
     fun getRecipes(queries: Map<String, String>) = viewModelScope.launch {
         getRecipesSafeCall(queries)
     }
+
+    fun searchRecipes(searchQuery: Map<String, String>) = viewModelScope.launch {
+        searchRecipesCall(searchQuery)
+    }
+
+    private suspend fun searchRecipesCall(queries: Map<String, String>) {
+        _searchRecipesResponse.value = Resource.Loading()
+        if (hasInternetConnection()) {
+            try {
+                val response = repository.remote.searchRecipes(queries)
+                _searchRecipesResponse.value = handleResponse(response)
+            } catch (e: Exception) {
+                _searchRecipesResponse.value = Resource.Error("Recipes not found.")
+            }
+        } else {
+            _searchRecipesResponse.value = Resource.Error("No Internet Connection.")
+        }
+    }
+
 
     private suspend fun getRecipesSafeCall(queries: Map<String, String>) {
         _recipesResponse.value = Resource.Loading()
@@ -46,7 +67,7 @@ class MainViewModel @Inject constructor(
                 _recipesResponse.value = handleResponse(response)
 
                 val foodRecipe = recipesResponse.value!!.data
-                if (foodRecipe != null){
+                if (foodRecipe != null) {
                     offlineCacheRecipes(foodRecipe)
                 }
 
