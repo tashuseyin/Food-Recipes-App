@@ -34,4 +34,5 @@
     <string name="apply">Apply</string>
     <string name="meal_type">Meal Type</string>
     <string name="diet_type">Diet Type</string>
+    <string name="search">Search</string>
 </resources>
