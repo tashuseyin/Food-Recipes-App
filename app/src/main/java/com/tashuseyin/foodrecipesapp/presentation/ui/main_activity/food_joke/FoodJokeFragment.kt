@@ -1,4 +1,4 @@
-package com.tashuseyin.foodrecipesapp.presentation.ui.food_joke
+package com.tashuseyin.foodrecipesapp.presentation.ui.main_activity.food_joke
 
 import android.view.LayoutInflater
 import androidx.viewbinding.ViewBinding

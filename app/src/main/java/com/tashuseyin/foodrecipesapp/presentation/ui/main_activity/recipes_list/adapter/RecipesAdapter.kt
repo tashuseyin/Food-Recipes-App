@@ -1,4 +1,4 @@
-package com.tashuseyin.foodrecipesapp.presentation.ui.recipes_list.adapter
+package com.tashuseyin.foodrecipesapp.presentation.ui.main_activity.recipes_list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

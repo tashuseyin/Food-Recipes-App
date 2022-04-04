@@ -1,4 +1,4 @@
-package com.tashuseyin.foodrecipesapp.presentation.ui.favorite_recipes
+package com.tashuseyin.foodrecipesapp.presentation.ui.main_activity.favorite_recipes
 
 import android.view.LayoutInflater
 import androidx.viewbinding.ViewBinding

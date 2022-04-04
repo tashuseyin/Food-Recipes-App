@@ -1,4 +1,4 @@
-package com.tashuseyin.foodrecipesapp.presentation.ui.activities
+package com.tashuseyin.foodrecipesapp.presentation.ui.main_activity.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

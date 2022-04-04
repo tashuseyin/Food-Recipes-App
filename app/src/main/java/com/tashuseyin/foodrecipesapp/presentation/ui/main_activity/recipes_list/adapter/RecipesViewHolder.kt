@@ -1,4 +1,4 @@
-package com.tashuseyin.foodrecipesapp.presentation.ui.recipes_list.adapter
+package com.tashuseyin.foodrecipesapp.presentation.ui.main_activity.recipes_list.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.tashuseyin.foodrecipesapp.data.model.FoodRecipes

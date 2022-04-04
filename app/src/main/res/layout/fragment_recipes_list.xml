@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/lightGray"
-        tools:context=".presentation.ui.recipes_list.RecipesListFragment">
+        tools:context=".presentation.ui.main_activity.recipes_list.RecipesListFragment">
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_layout"

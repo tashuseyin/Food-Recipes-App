@@ -1,4 +1,4 @@
-package com.tashuseyin.foodrecipesapp.presentation.ui.recipes_list.bottomsheet
+package com.tashuseyin.foodrecipesapp.presentation.ui.main_activity.recipes_list.bottomsheet
 
 import android.os.Bundle
 import android.util.Log

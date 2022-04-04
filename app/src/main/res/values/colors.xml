@@ -26,4 +26,7 @@
     <color name="chipBackgroundColor">@color/lightGray</color>
     <color name="checkedChipTextColor">@color/purple_500</color>
     <color name="chipTextColor">@color/darkGray</color>
+    
+    <color name="actionBackgroundColor">@color/purple_700</color>
+
 </resources>

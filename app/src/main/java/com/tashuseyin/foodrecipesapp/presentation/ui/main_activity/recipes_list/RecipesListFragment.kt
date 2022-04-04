@@ -1,4 +1,4 @@
-package com.tashuseyin.foodrecipesapp.presentation.ui.recipes_list
+package com.tashuseyin.foodrecipesapp.presentation.ui.main_activity.recipes_list
 
 import android.os.Bundle
 import android.util.Log
@@ -19,7 +19,7 @@ import com.tashuseyin.foodrecipesapp.baseviewmodel.MainViewModel
 import com.tashuseyin.foodrecipesapp.bindingadapter.BindingFragment
 import com.tashuseyin.foodrecipesapp.common.Resource
 import com.tashuseyin.foodrecipesapp.databinding.FragmentRecipesListBinding
-import com.tashuseyin.foodrecipesapp.presentation.ui.recipes_list.adapter.RecipesAdapter
+import com.tashuseyin.foodrecipesapp.presentation.ui.main_activity.recipes_list.adapter.RecipesAdapter
 import com.tashuseyin.foodrecipesapp.presentation.viewmodel.RecipesViewModel
 import com.tashuseyin.foodrecipesapp.util.NetworkListener
 import com.tashuseyin.foodrecipesapp.util.observeOnce

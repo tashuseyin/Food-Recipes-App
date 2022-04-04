@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/recipesListFragment"
-        android:name="com.tashuseyin.foodrecipesapp.presentation.ui.recipes_list.RecipesListFragment"
+        android:name="com.tashuseyin.foodrecipesapp.presentation.ui.main_activity.recipes_list.RecipesListFragment"
         android:label="@string/recipes_fragment"
         tools:layout="@layout/fragment_recipes_list" >
         <action
@@ -17,24 +17,36 @@
             android:name="backBottomSheet"
             app:argType="boolean"
             android:defaultValue="false" />
+        <action
+            android:id="@+id/action_recipesListFragment_to_detailActivity"
+            app:destination="@id/detailActivity" />
     </fragment>
     <fragment
         android:id="@+id/favoriteRecipesFragment"
-        android:name="com.tashuseyin.foodrecipesapp.presentation.ui.favorite_recipes.FavoriteRecipesFragment"
+        android:name="com.tashuseyin.foodrecipesapp.presentation.ui.main_activity.favorite_recipes.FavoriteRecipesFragment"
         android:label="Favorites"
         tools:layout="@layout/fragment_favorite_recipes" />
     <fragment
         android:id="@+id/foodJokeFragment"
-        android:name="com.tashuseyin.foodrecipesapp.presentation.ui.food_joke.FoodJokeFragment"
+        android:name="com.tashuseyin.foodrecipesapp.presentation.ui.main_activity.food_joke.FoodJokeFragment"
         android:label="@string/food_joke"
         tools:layout="@layout/fragment_food_joke" />
     <dialog
         android:id="@+id/recipesBottomSheetFragment"
-        android:name="com.tashuseyin.foodrecipesapp.presentation.ui.recipes_list.bottomsheet.RecipesBottomSheetFragment"
+        android:name="com.tashuseyin.foodrecipesapp.presentation.ui.main_activity.recipes_list.bottomsheet.RecipesBottomSheetFragment"
         android:label="recipes_bottom_sheet"
         tools:layout="@layout/recipes_bottom_sheet" >
         <action
             android:id="@+id/action_recipesBottomSheetFragment_to_recipesListFragment"
             app:destination="@id/recipesListFragment" />
     </dialog>
+    <activity
+        android:id="@+id/detailActivity"
+        android:name="com.tashuseyin.foodrecipesapp.presentation.ui.detail_activity.activities.DetailActivity"
+        android:label="activity_detail"
+        tools:layout="@layout/activity_detail" >
+        <argument
+            android:name="result"
+            app:argType="com.tashuseyin.foodrecipesapp.data.model.FoodRecipes" />
+    </activity>
 </navigation>

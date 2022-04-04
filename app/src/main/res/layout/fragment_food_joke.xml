@@ -4,6 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightGray"
-    tools:context=".presentation.ui.food_joke.FoodJokeFragment">
+    tools:context=".presentation.ui.main_activity.food_joke.FoodJokeFragment">
 
 </FrameLayout>

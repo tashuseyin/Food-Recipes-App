@@ -14,8 +14,11 @@
         android:usesCleartextTraffic="true"
         android:name=".FoodRecipesApp"
         android:theme="@style/Theme.FoodRecipesApp">
+        <activity android:name=".presentation.ui.detail_activity.activities.DetailActivity"
+            android:exported="true"
+            android:theme="@style/DetailsActivityStyle"/>
         <activity
-            android:name=".presentation.ui.activities.MainActivity"
+            android:name=".presentation.ui.main_activity.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
