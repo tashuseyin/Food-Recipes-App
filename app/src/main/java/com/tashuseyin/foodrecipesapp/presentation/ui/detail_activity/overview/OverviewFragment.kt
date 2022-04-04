@@ -11,6 +11,7 @@ import coil.load
 import com.tashuseyin.foodrecipesapp.R
 import com.tashuseyin.foodrecipesapp.bindingadapter.BindingFragment
 import com.tashuseyin.foodrecipesapp.bindingadapter.RecipesRowBinding
+import com.tashuseyin.foodrecipesapp.common.Constants.RECIPES_BUNDLE_KEY
 import com.tashuseyin.foodrecipesapp.data.model.FoodRecipes
 import com.tashuseyin.foodrecipesapp.databinding.FragmentOverviewBinding
 
@@ -27,7 +28,8 @@ class OverviewFragment : BindingFragment<FragmentOverviewBinding>() {
 
     private fun loadDesignView() {
         val args = arguments
-        val myBundle: FoodRecipes = args!!.getParcelable<FoodRecipes>("recipeBundle") as FoodRecipes
+        val myBundle: FoodRecipes =
+            args!!.getParcelable<FoodRecipes>(RECIPES_BUNDLE_KEY) as FoodRecipes
 
         binding.apply {
             mainImageView.load(myBundle.image)

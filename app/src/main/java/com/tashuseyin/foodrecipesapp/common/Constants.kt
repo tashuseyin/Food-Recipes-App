@@ -3,6 +3,7 @@ package com.tashuseyin.foodrecipesapp.common
 object Constants {
 
     const val BASE_URL = "https://api.spoonacular.com"
+    const val BASE_IMAGE_URL = "https://spoonacular.com/cdn/ingredients_100x100/"
     const val API_KEY = "504faf9ec94c45f681fefb4b0f297e0e"
 
     const val QUERY_NUMBER = "number"
@@ -26,4 +27,5 @@ object Constants {
     const val PREFERENCES_NAME="foody_preferences"
     const val BACKONLINE = "backOnline"
 
+    const val RECIPES_BUNDLE_KEY = "recipesBundle"
 }

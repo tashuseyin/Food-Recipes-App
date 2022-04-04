@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.navArgs
 import com.google.android.material.tabs.TabLayoutMediator
 import com.tashuseyin.foodrecipesapp.R
+import com.tashuseyin.foodrecipesapp.common.Constants.RECIPES_BUNDLE_KEY
 import com.tashuseyin.foodrecipesapp.databinding.ActivityDetailBinding
 import com.tashuseyin.foodrecipesapp.presentation.ui.detail_activity.ingredients.IngredientsFragment
 import com.tashuseyin.foodrecipesapp.presentation.ui.detail_activity.instructions.InstructionsFragment
@@ -48,14 +49,13 @@ class DetailActivity : AppCompatActivity() {
         titles.add("Instructions")
 
         val resultBundle = Bundle()
-        resultBundle.putParcelable("recipeBundle", args.result)
+        resultBundle.putParcelable(RECIPES_BUNDLE_KEY, args.result)
 
         val adapter = PagerAdapter(
             resultBundle,
             fragments,
             this
         )
-        binding.viewPager.isUserInputEnabled = false
         binding.viewPager.adapter = adapter
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = titles[position]
