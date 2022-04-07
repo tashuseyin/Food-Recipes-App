@@ -1,9 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/lightGray"
-    tools:context=".presentation.ui.main_activity.favorite_recipes.FavoriteRecipesFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</FrameLayout>
+    <data>
+
+        <variable
+            name="mainViewModel"
+            type="com.tashuseyin.foodrecipesapp.baseviewmodel.MainViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.tashuseyin.foodrecipesapp.presentation.ui.main_activity.favorite_recipes.adapter.FavoriteRecipesAdapter" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lightGray"
+        tools:context=".presentation.ui.main_activity.favorite_recipes.FavoriteRecipesFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            viewvisibility="@{mainViewModel.readFavoriteRecipes}"
+            setData="@{adapter}"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <ImageView
+            android:id="@+id/no_data_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            viewvisibility="@{mainViewModel.readFavoriteRecipes}"
+            android:contentDescription="@string/image"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_book"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/no_data_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            viewvisibility="@{mainViewModel.readFavoriteRecipes}"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"
+            android:text="@string/no_favorite_recipes"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
+    </FrameLayout>
+</layout>
