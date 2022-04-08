@@ -7,7 +7,9 @@ import android.net.NetworkCapabilities
 import androidx.lifecycle.*
 import com.tashuseyin.foodrecipesapp.common.Resource
 import com.tashuseyin.foodrecipesapp.data.datasource.local.entity.FavoritesEntity
+import com.tashuseyin.foodrecipesapp.data.datasource.local.entity.FoodJokeEntity
 import com.tashuseyin.foodrecipesapp.data.datasource.local.entity.RecipesEntity
+import com.tashuseyin.foodrecipesapp.data.model.FoodJoke
 import com.tashuseyin.foodrecipesapp.data.model.FoodResult
 import com.tashuseyin.foodrecipesapp.data.repository.FoodRecipesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,13 +26,17 @@ class MainViewModel @Inject constructor(
 
     /**Database**/
     val readRecipes: LiveData<List<RecipesEntity>> = repository.local.readRecipes().asLiveData()
-    val readFavoriteRecipes: LiveData<List<FavoritesEntity>> =
-        repository.local.readFavoriteRecipes().asLiveData()
+    val readFavoriteRecipes: LiveData<List<FavoritesEntity>> = repository.local.readFavoriteRecipes().asLiveData()
+    val readFoodJoke: LiveData<List<FoodJokeEntity>> = repository.local.readFoodJoke().asLiveData()
 
     private fun insertRecipes(recipesEntity: RecipesEntity) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.insertRecipes(recipesEntity)
         }
+
+    fun insertFoodJoke(foodJokeEntity: FoodJokeEntity) = viewModelScope.launch {
+        repository.local.insertFoodJoke(foodJokeEntity)
+    }
 
     fun insertFavoriteRecipes(favoritesEntity: FavoritesEntity) = viewModelScope.launch {
         repository.local.insertFavoriteRecipes(favoritesEntity)
@@ -51,12 +57,40 @@ class MainViewModel @Inject constructor(
     private val _searchRecipesResponse: MutableLiveData<Resource<FoodResult>> = MutableLiveData()
     val searchRecipesResponse get() = _searchRecipesResponse
 
+    private val _foodJokeResponse: MutableLiveData<Resource<FoodJoke>> = MutableLiveData()
+    val foodJokeResponse get() = _foodJokeResponse
+
+
+    fun getFoodJoke(apiKey: String) = viewModelScope.launch {
+        getFoodJokeCall(apiKey)
+    }
+
     fun getRecipes(queries: Map<String, String>) = viewModelScope.launch {
         getRecipesSafeCall(queries)
     }
 
     fun searchRecipes(searchQuery: Map<String, String>) = viewModelScope.launch {
         searchRecipesCall(searchQuery)
+    }
+
+    private suspend fun getFoodJokeCall(apiKey: String) {
+        _foodJokeResponse.value = Resource.Loading()
+        if (hasInternetConnection()) {
+            try {
+                val response = repository.remote.getFoodJoke(apiKey)
+                _foodJokeResponse.value = handleFoodJokeResponse(response)
+
+                val foodJoke = _foodJokeResponse.value!!.data
+                if (foodJoke != null){
+                    offlineCacheFoodJoke(foodJoke)
+                }
+
+            } catch (e: Exception) {
+                _foodJokeResponse.value = Resource.Error("Recipes not found.")
+            }
+        } else {
+            _foodJokeResponse.value = Resource.Error("No Internet Connection.")
+        }
     }
 
     private suspend fun searchRecipesCall(queries: Map<String, String>) {
@@ -115,9 +149,32 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    private fun handleFoodJokeResponse(response: Response<FoodJoke>): Resource<FoodJoke> {
+        return when {
+            response.message().toString().contains("timeout") -> {
+                Resource.Error("Timeout")
+            }
+            response.code() == 402 -> {
+                Resource.Error("API Key Limited")
+            }
+            response.isSuccessful -> {
+                val foodRecipesData = response.body()
+                Resource.Success(foodRecipesData!!)
+            }
+            else -> {
+                Resource.Error(response.message())
+            }
+        }
+    }
+
     private fun offlineCacheRecipes(foodRecipe: FoodResult) {
         val recipesEntity = RecipesEntity(foodRecipe)
         insertRecipes(recipesEntity)
+    }
+
+    private fun offlineCacheFoodJoke(foodJoke: FoodJoke) {
+        val foodJokeEntity = FoodJokeEntity(foodJoke)
+        insertFoodJoke(foodJokeEntity)
     }
 
     private fun hasInternetConnection(): Boolean {

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:name=".FoodRecipesApp"
-        android:theme="@style/Theme.FoodRecipesApp">
+        android:theme="@style/Theme.App.Starting">
         <activity android:name=".presentation.ui.detail_activity.activities.DetailActivity"
             android:exported="true"
             android:theme="@style/DetailsActivityStyle"/>

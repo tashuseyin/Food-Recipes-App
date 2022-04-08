@@ -2,6 +2,7 @@ package com.tashuseyin.foodrecipesapp.data.datasource.local
 
 import com.tashuseyin.foodrecipesapp.data.datasource.local.db.RecipesDao
 import com.tashuseyin.foodrecipesapp.data.datasource.local.entity.FavoritesEntity
+import com.tashuseyin.foodrecipesapp.data.datasource.local.entity.FoodJokeEntity
 import com.tashuseyin.foodrecipesapp.data.datasource.local.entity.RecipesEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -17,6 +18,14 @@ class LocalDataSource @Inject constructor(
         recipesDao.insertFavoriteRecipes(favoritesEntity)
     }
 
+    suspend fun insertFoodJoke(foodJokeEntity: FoodJokeEntity) {
+        recipesDao.insertFoodJoke(foodJokeEntity)
+    }
+
+    fun readFoodJoke(): Flow<List<FoodJokeEntity>> {
+        return recipesDao.readFoodJoke()
+    }
+
     fun readRecipes(): Flow<List<RecipesEntity>> {
         return recipesDao.readRecipes()
     }
@@ -25,11 +34,11 @@ class LocalDataSource @Inject constructor(
         return recipesDao.readFavoriteRecipes()
     }
 
-    suspend fun deleteFavoriteRecipes(favoritesEntity: FavoritesEntity){
+    suspend fun deleteFavoriteRecipes(favoritesEntity: FavoritesEntity) {
         recipesDao.deleteFavoriteRecipe(favoritesEntity)
     }
 
-    suspend fun deleteAllFavoriteRecipes(){
+    suspend fun deleteAllFavoriteRecipes() {
         recipesDao.deleteAllFavoriteRecipes()
     }
 }
