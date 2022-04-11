@@ -13,7 +13,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_food_joke_background"
+        android:background="@drawable/ic_food_joke_background_dark"
         tools:context=".presentation.ui.main_activity.food_joke.FoodJokeFragment">
 
         <com.google.android.material.card.MaterialCardView
@@ -22,10 +22,10 @@
             readDatabase3="@{mainViewModel.readFoodJoke}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
             android:layout_gravity="center"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
+            android:visibility="invisible"
             app:cardCornerRadius="6dp"
             app:strokeColor="@color/strokeColor"
             app:strokeWidth="1dp">
@@ -64,10 +64,10 @@
 
         <ImageView
             android:id="@+id/food_joke_error_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
             readApiResponse4="@{mainViewModel.foodJokeResponse}"
             readDatabase4="@{mainViewModel.readFoodJoke}"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
             android:alpha="0.3"
             android:src="@drawable/ic_sad"

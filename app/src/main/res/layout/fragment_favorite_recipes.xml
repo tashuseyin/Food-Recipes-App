@@ -18,7 +18,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/lightGray"
+        android:background="@color/backgroundColor"
         tools:context=".presentation.ui.main_activity.favorite_recipes.FavoriteRecipesFragment">
 
         <androidx.recyclerview.widget.RecyclerView

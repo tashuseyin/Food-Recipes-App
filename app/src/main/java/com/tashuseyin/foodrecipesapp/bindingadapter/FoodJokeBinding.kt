@@ -79,6 +79,9 @@ class FoodJokeBinding {
             if (apiResponse is Resource.Success) {
                 view.visibility = View.INVISIBLE
             }
+            if (apiResponse is Resource.Loading) {
+                view.visibility = View.INVISIBLE
+            }
         }
 
     }
