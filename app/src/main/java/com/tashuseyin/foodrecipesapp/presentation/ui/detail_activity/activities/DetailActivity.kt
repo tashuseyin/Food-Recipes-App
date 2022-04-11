@@ -28,6 +28,7 @@ class DetailActivity : AppCompatActivity() {
     private val mainViewModel: MainViewModel by viewModels()
     private var recipesSaved = false
     private var savedRecipeId = 0
+    private lateinit var menuItem: MenuItem
     private lateinit var binding: ActivityDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,8 +76,8 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.details_menu, menu)
-        val menuItem = menu?.findItem(R.id.save_to_favorite)
-        menuItem?.let { checkedSavedRecipes(it) }
+        menuItem = menu!!.findItem(R.id.save_to_favorite)
+        checkedSavedRecipes(menuItem)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -88,8 +89,6 @@ class DetailActivity : AppCompatActivity() {
                         changeMenuItemColor(menuItem, R.color.yellow)
                         savedRecipeId = savedRecipe.uid
                         recipesSaved = true
-                    } else {
-                        changeMenuItemColor(menuItem, R.color.white)
                     }
                 }
             } catch (e: Exception) {
@@ -143,5 +142,10 @@ class DetailActivity : AppCompatActivity() {
 
     private fun changeMenuItemColor(item: MenuItem, color: Int) {
         item.icon.setTint(ContextCompat.getColor(this, color))
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        changeMenuItemColor(menuItem, R.color.white)
     }
 }

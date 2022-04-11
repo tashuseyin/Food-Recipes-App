@@ -1,5 +1,6 @@
 package com.tashuseyin.foodrecipesapp.bindingadapter
 
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -14,34 +15,21 @@ class RecipesBinding {
 
         @BindingAdapter("readApiResponse", "readDatabase", requireAll = true)
         @JvmStatic
-        fun errorImageVisibility(
-            imageView: ImageView,
+        fun handleReadDataErrors(
+            view: View,
             apiResponse: Resource<FoodResult>?,
             database: List<RecipesEntity>?
         ) {
-            if (apiResponse is Resource.Error && database.isNullOrEmpty()) {
-                imageView.isVisible = true
-            } else if (apiResponse is Resource.Loading) {
-                imageView.isVisible = false
-            } else if (apiResponse is Resource.Success) {
-                imageView.isVisible = false
-            }
-        }
 
-        @BindingAdapter("readApiResponse2", "readDatabase2", requireAll = true)
-        @JvmStatic
-        fun errorTextVisibility(
-            textView: TextView,
-            apiResponse: Resource<FoodResult>?,
-            database: List<RecipesEntity>?
-        ) {
-            if (apiResponse is Resource.Error && database.isNullOrEmpty()) {
-                textView.isVisible = true
-                textView.text = apiResponse.message.toString()
-            } else if (apiResponse is Resource.Loading) {
-                textView.isVisible = false
-            } else if (apiResponse is Resource.Success) {
-                textView.isVisible = false
+            when(view){
+                is ImageView -> {
+                    view.isVisible = apiResponse is Resource.Error && database.isNullOrEmpty()
+                }
+
+                is TextView -> {
+                    view.isVisible = apiResponse is Resource.Error && database.isNullOrEmpty()
+                    view.text = apiResponse?.message.toString()
+                }
             }
         }
     }
