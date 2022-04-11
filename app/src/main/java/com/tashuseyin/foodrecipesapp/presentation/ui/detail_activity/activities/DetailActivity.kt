@@ -68,6 +68,7 @@ class DetailActivity : AppCompatActivity() {
             fragments,
             this
         )
+        binding.viewPager.isUserInputEnabled = false
         binding.viewPager.adapter = adapter
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = titles[position]
