@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layoutDescription="@xml/fragment_overview_scene"
     tools:context=".presentation.ui.detail_activity.overview.OverviewFragment">
 
     <ImageView
@@ -35,19 +36,19 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="12dp"
-        tools:text="100"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/main_image_view"
-        app:layout_constraintEnd_toEndOf="@+id/gradient_overlay" />
+        app:layout_constraintEnd_toEndOf="@+id/gradient_overlay"
+        tools:text="100" />
 
     <ImageView
         android:id="@+id/time_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_time"
         android:contentDescription="@string/image"
+        android:src="@drawable/ic_time"
         app:layout_constraintBottom_toTopOf="@+id/time_textView"
         app:layout_constraintEnd_toEndOf="@+id/time_textView"
         app:layout_constraintStart_toStartOf="@+id/time_textView"
@@ -58,19 +59,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        tools:text="100"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/time_textView"
-        app:layout_constraintEnd_toStartOf="@+id/time_textView" />
+        app:layout_constraintEnd_toStartOf="@+id/time_textView"
+        tools:text="100" />
 
     <ImageView
         android:id="@+id/likes_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_heart"
         android:contentDescription="@string/image"
+        android:src="@drawable/ic_heart"
         app:layout_constraintBottom_toTopOf="@+id/likes_textView"
         app:layout_constraintEnd_toEndOf="@+id/likes_textView"
         app:layout_constraintStart_toStartOf="@+id/likes_textView"
@@ -97,10 +98,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:contentDescription="@string/image"
-        app:tint="@color/itemColor"
         android:src="@drawable/ic_baseline_check_circle_24"
         app:layout_constraintStart_toStartOf="@+id/title"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:tint="@color/itemColor" />
 
     <TextView
         android:id="@+id/vegetarian_text"
@@ -119,10 +120,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:contentDescription="@string/image"
-        app:tint="@color/itemColor"
         android:src="@drawable/ic_baseline_check_circle_24"
         app:layout_constraintStart_toStartOf="@+id/vegetarian_check_view"
-        app:layout_constraintTop_toBottomOf="@+id/vegetarian_check_view" />
+        app:layout_constraintTop_toBottomOf="@+id/vegetarian_check_view"
+        app:tint="@color/itemColor" />
 
     <TextView
         android:id="@+id/vegan_text"
@@ -141,11 +142,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:contentDescription="@string/image"
-        app:tint="@color/itemColor"
         android:src="@drawable/ic_baseline_check_circle_24"
         app:layout_constraintBottom_toBottomOf="@+id/vegetarian_text"
         app:layout_constraintStart_toEndOf="@+id/vegetarian_text"
-        app:layout_constraintTop_toTopOf="@+id/vegetarian_text" />
+        app:layout_constraintTop_toTopOf="@+id/vegetarian_text"
+        app:tint="@color/itemColor" />
 
     <TextView
         android:id="@+id/dairy_free_text"
@@ -164,10 +165,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:contentDescription="@string/image"
-        app:tint="@color/itemColor"
         android:src="@drawable/ic_baseline_check_circle_24"
         app:layout_constraintStart_toStartOf="@+id/dairy_free_check_view"
-        app:layout_constraintTop_toBottomOf="@+id/dairy_free_check_view" />
+        app:layout_constraintTop_toBottomOf="@+id/dairy_free_check_view"
+        app:tint="@color/itemColor" />
 
     <TextView
         android:id="@+id/gluten_free_text"
@@ -185,12 +186,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        app:tint="@color/itemColor"
         android:contentDescription="@string/image"
         android:src="@drawable/ic_baseline_check_circle_24"
         app:layout_constraintBottom_toBottomOf="@+id/dairy_free_text"
         app:layout_constraintStart_toEndOf="@+id/dairy_free_text"
-        app:layout_constraintTop_toTopOf="@+id/dairy_free_text" />
+        app:layout_constraintTop_toTopOf="@+id/dairy_free_text"
+        app:tint="@color/itemColor" />
 
     <TextView
         android:id="@+id/healthy_text"
@@ -209,10 +210,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:contentDescription="@string/image"
-        app:tint="@color/itemColor"
         android:src="@drawable/ic_baseline_check_circle_24"
         app:layout_constraintStart_toStartOf="@+id/healthy_check_view"
-        app:layout_constraintTop_toBottomOf="@+id/healthy_check_view" />
+        app:layout_constraintTop_toBottomOf="@+id/healthy_check_view"
+        app:tint="@color/itemColor" />
 
     <TextView
         android:id="@+id/cheap_text"
@@ -248,12 +249,12 @@
                 android:id="@+id/summary_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="TextView"
                 android:textColor="@color/descriptionColor"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                tools:text="TextView" />
 
 
         </LinearLayout>
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>
